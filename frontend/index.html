@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Libraria | Smart Library Management</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <a href="index.html" class="brand">
+        <span class="brand-mark">
+            <i class="fa-solid fa-book-open"></i>
+        </span>
+
+        <span>LIBRARIA</span>
+    </a>
+
+    <nav class="nav-links">
+        <a href="#home" class="active">Home</a>
+        <a href="#discover">Discover</a>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+    </nav>
+
+    <div class="nav-actions">
+
+        <a href="login.html" class="login-link">
+            Sign in
+        </a>
+
+        <a href="register.html" class="btn btn-primary">
+            Get Started
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+    </div>
+
+    <button class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+</header>
+
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+    <div class="hero-grid"></div>
+
+    <div class="hero-glow glow-one"></div>
+    <div class="hero-glow glow-two"></div>
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            <span></span>
+            THE SMARTER WAY TO MANAGE YOUR LIBRARY
+        </div>
+
+        <h1>
+            Where great books
+            <br>
+            <em>find great minds.</em>
+        </h1>
+
+        <p class="hero-copy">
+            A beautifully simple platform for discovering books,
+            managing members, tracking circulation and building
+            a better library experience.
+        </p>
+
+        <div class="hero-actions">
+
+            <a href="login.html"
+               class="btn btn-primary btn-large">
+
+                Explore the Library
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+            <a href="#features"
+               class="btn btn-ghost btn-large">
+
+                <i class="fa-regular fa-circle-play"></i>
+
+                See how it works
+
+            </a>
+
+        </div>
+
+
+        <div class="hero-trust">
+
+            <div class="avatar-stack">
+
+                <span>PK</span>
+                <span>AS</span>
+                <span>RM</span>
+                <span>+1k</span>
+
+            </div>
+
+            <div>
+
+                <strong>1,200+ readers</strong>
+
+                <small>
+                    already building better reading habits
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- DASHBOARD PREVIEW -->
+
+    <div class="hero-visual">
+
+        <div class="floating-card card-top">
+
+            <span class="mini-icon">
+                <i class="fa-solid fa-chart-line"></i>
+            </span>
+
+            <div>
+
+                <strong>+18.4%</strong>
+
+                <small>
+                    monthly circulation
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-preview">
+
+            <div class="preview-top">
+
+                <div>
+
+                    <small>Overview</small>
+
+                    <h3>
+                        Good morning, Piyush
+                    </h3>
+
+                </div>
+
+                <span class="preview-avatar">
+                    PK
+                </span>
+
+            </div>
+
+
+            <div class="preview-stats">
+
+                <div>
+
+                    <small>Total books</small>
+
+                    <strong>12,450</strong>
+
+                    <span class="up">
+                        +8.2%
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <small>Active members</small>
+
+                    <strong>1,284</strong>
+
+                    <span class="up">
+                        +5.7%
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <small>Issued today</small>
+
+                    <strong>342</strong>
+
+                    <span class="up">
+                        +12.4%
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="preview-chart">
+
+                <div class="chart-head">
+
+                    <span>
+                        Borrowing activity
+                    </span>
+
+                    <small>
+                        Last 7 months
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </small>
+
+                </div>
+
+
+                <div class="bars">
+
+                    <span style="height:38%"></span>
+                    <span style="height:52%"></span>
+                    <span style="height:45%"></span>
+                    <span style="height:68%"></span>
+                    <span style="height:59%"></span>
+                    <span style="height:82%"></span>
+                    <span style="height:94%"></span>
+
+                </div>
+
+
+                <div class="months">
+
+                    <span>Feb</span>
+                    <span>Mar</span>
+                    <span>Apr</span>
+                    <span>May</span>
+                    <span>Jun</span>
+                    <span>Jul</span>
+                    <span>Aug</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="preview-list">
+
+                <div class="list-head">
+
+                    <strong>
+                        Recent activity
+                    </strong>
+
+                    <a href="#">
+                        View all
+                    </a>
+
+                </div>
+
+
+                <div class="activity-row">
+
+                    <span class="book-icon">
+
+                        <i class="fa-solid fa-book"></i>
+
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Atomic Habits
+                        </strong>
+
+                        <small>
+                            Issued to Rahul Mehta
+                        </small>
+
+                    </div>
+
+                    <b>Today</b>
+
+                </div>
+
+
+                <div class="activity-row">
+
+                    <span class="book-icon soft">
+
+                        <i class="fa-solid fa-book"></i>
+
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Clean Code
+                        </strong>
+
+                        <small>
+                            Returned by Ananya Shah
+                        </small>
+
+                    </div>
+
+                    <b>Today</b>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="floating-card card-bottom">
+
+            <span class="check-icon">
+
+                <i class="fa-solid fa-check"></i>
+
+            </span>
+
+            <div>
+
+                <strong>
+                    Book returned
+                </strong>
+
+                <small>
+                    Clean Code · Just now
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STATS -->
+
+<section class="stats-strip">
+
+    <div>
+        <strong>12K+</strong>
+        <span>Books catalogued</span>
+    </div>
+
+    <div>
+        <strong>1.2K+</strong>
+        <span>Active readers</span>
+    </div>
+
+    <div>
+        <strong>98.7%</strong>
+        <span>Return accuracy</span>
+    </div>
+
+    <div>
+        <strong>24/7</strong>
+        <span>Digital access</span>
+    </div>
+
+</section>
+
+
+<!-- DISCOVER -->
+
+<section class="section discover" id="discover">
+
+    <div class="section-heading">
+
+        <div>
+
+            <div class="eyebrow">
+                DISCOVER YOUR NEXT CHAPTER
+            </div>
+
+            <h2>
+                A library that feels
+                <br>
+                <em>made for you.</em>
+            </h2>
+
+        </div>
+
+
+        <p>
+            Search, reserve, issue and return books from
+            one elegant workspace designed around the way
+            modern libraries actually work.
+        </p>
+
+    </div>
+
+
+    <div class="book-grid">
+
+
+        <article class="book-card">
+
+            <div class="book-cover book-one">
+
+                <span>
+                    ATOMIC
+                    <br>
+                    HABITS
+                </span>
+
+                <small>
+                    James Clear
+                </small>
+
+            </div>
+
+            <div class="book-meta">
+
+                <span>
+                    SELF DEVELOPMENT
+                </span>
+
+                <strong>
+                    Atomic Habits
+                </strong>
+
+                <small>
+                    James Clear
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <article class="book-card">
+
+            <div class="book-cover book-two">
+
+                <span>
+                    CLEAN
+                    <br>
+                    CODE
+                </span>
+
+                <small>
+                    Robert C. Martin
+                </small>
+
+            </div>
+
+            <div class="book-meta">
+
+                <span>
+                    PROGRAMMING
+                </span>
+
+                <strong>
+                    Clean Code
+                </strong>
+
+                <small>
+                    Robert C. Martin
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <article class="book-card">
+
+            <div class="book-cover book-three">
+
+                <span>
+                    THE
+                    <br>
+                    ALCHEMIST
+                </span>
+
+                <small>
+                    Paulo Coelho
+                </small>
+
+            </div>
+
+            <div class="book-meta">
+
+                <span>
+                    FICTION
+                </span>
+
+                <strong>
+                    The Alchemist
+                </strong>
+
+                <small>
+                    Paulo Coelho
+                </small>
+
+            </div>
+
+        </article>
+
+
+        <article class="book-card">
+
+            <div class="book-cover book-four">
+
+                <span>
+                    IKIGAI
+                </span>
+
+                <small>
+                    Héctor García
+                </small>
+
+            </div>
+
+            <div class="book-meta">
+
+                <span>
+                    PHILOSOPHY
+                </span>
+
+                <strong>
+                    Ikigai
+                </strong>
+
+                <small>
+                    Héctor García
+                </small>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="features-section" id="features">
+
+    <div class="section-heading centered">
+
+        <div class="eyebrow">
+            EVERYTHING IN ONE PLACE
+        </div>
+
+        <h2>
+            Powerful tools.
+            <em>Simple experience.</em>
+        </h2>
+
+        <p>
+            Every workflow is designed to save time for
+            librarians and make reading effortless for members.
+        </p>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+
+        <article class="feature-card large-feature">
+
+            <span class="feature-icon">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+            </span>
+
+            <h3>
+                Find anything, instantly.
+            </h3>
+
+            <p>
+                Search by title, author, ISBN, category,
+                language or availability with smart filtering
+                and fast results.
+            </p>
+
+
+            <div class="search-demo">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <span>
+                    Search books, authors, ISBN...
+                </span>
+
+                <kbd>
+                    CTRL K
+                </kbd>
+
+            </div>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <span class="feature-icon violet">
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+            </span>
+
+            <h3>
+                Insights that matter.
+            </h3>
+
+            <p>
+                Understand circulation, popular titles,
+                member growth and fine collection at a glance.
+            </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <span class="feature-icon green">
+
+                <i class="fa-solid fa-arrows-rotate"></i>
+
+            </span>
+
+            <h3>
+                Effortless circulation.
+            </h3>
+
+            <p>
+                Issue and return books with automatic
+                availability updates, due dates and
+                fine calculations.
+            </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+            <span class="feature-icon amber">
+
+                <i class="fa-regular fa-bell"></i>
+
+            </span>
+
+            <h3>
+                Never miss a due date.
+            </h3>
+
+            <p>
+                Keep members informed with overdue,
+                reservation and return notifications.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta-section" id="about">
+
+    <div class="cta-inner">
+
+        <div class="eyebrow">
+            BUILT FOR MODERN LIBRARIES
+        </div>
+
+        <h2>
+            Turn your library into
+            <br>
+            <em>a better experience.</em>
+        </h2>
+
+        <p>
+            From the first search to the final return,
+            Libraria keeps every detail organized.
+        </p>
+
+        <a href="register.html"
+           class="btn btn-light btn-large">
+
+            Start Building
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="brand">
+
+        <span class="brand-mark">
+            <i class="fa-solid fa-book-open"></i>
+        </span>
+
+        LIBRARIA
+
+    </div>
+
+    <span>
+        © 2026 Libraria. Built for better libraries.
+    </span>
+
+    <div class="footer-links">
+
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+
+    </div>
+
+</footer>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>

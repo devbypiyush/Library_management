@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard | Libraria</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body class="dashboard-page">
+
+
+<div class="app-layout">
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar">
+
+
+<a href="../index.html"
+class="brand sidebar-brand">
+
+<span class="brand-mark">
+<i class="fa-solid fa-book-open"></i>
+</span>
+
+<span>
+LIBRARIA
+</span>
+
+</a>
+
+
+<div class="nav-label">
+WORKSPACE
+</div>
+
+
+<nav class="side-nav">
+
+<a href="dashboard.html"
+class="active">
+
+<i class="fa-solid fa-table-columns"></i>
+
+<span>
+Dashboard
+</span>
+
+</a>
+
+
+<a href="books.html">
+
+<i class="fa-solid fa-book"></i>
+
+<span>
+Books
+</span>
+
+<b>
+12.4k
+</b>
+
+</a>
+
+
+<a href="#">
+
+<i class="fa-solid fa-users"></i>
+
+<span>
+Members
+</span>
+
+</a>
+
+
+<a href="#">
+
+<i class="fa-solid fa-arrow-right-arrow-left"></i>
+
+<span>
+Circulation
+</span>
+
+</a>
+
+
+<a href="#">
+
+<i class="fa-regular fa-bookmark"></i>
+
+<span>
+Reservations
+</span>
+
+<b>
+28
+</b>
+
+</a>
+
+</nav>
+
+
+<div class="nav-label">
+MANAGE
+</div>
+
+
+<nav class="side-nav">
+
+<a href="#">
+<i class="fa-solid fa-user-pen"></i>
+<span>Authors</span>
+</a>
+
+
+<a href="#">
+<i class="fa-solid fa-layer-group"></i>
+<span>Categories</span>
+</a>
+
+
+<a href="#">
+<i class="fa-solid fa-wallet"></i>
+<span>Fines & Payments</span>
+</a>
+
+
+<a href="#">
+<i class="fa-solid fa-chart-column"></i>
+<span>Reports</span>
+</a>
+
+</nav>
+
+
+<div class="sidebar-bottom">
+
+
+<a href="#">
+<i class="fa-solid fa-gear"></i>
+<span>Settings</span>
+</a>
+
+
+<div class="help-card">
+
+<span>
+<i class="fa-regular fa-circle-question"></i>
+</span>
+
+<strong>
+Need help?
+</strong>
+
+<small>
+Visit our support center
+</small>
+
+<a href="#">
+Get support →
+</a>
+
+</div>
+
+
+<a href="#" class="profile-mini">
+
+<span>
+PK
+</span>
+
+<div>
+
+<strong>
+Piyush Kulkarni
+</strong>
+
+<small>
+Administrator
+</small>
+
+</div>
+
+<i class="fa-solid fa-ellipsis"></i>
+
+</a>
+
+</div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="dashboard-main">
+
+
+<header class="dash-header">
+
+
+<button class="dash-menu" id="dashMenu">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+
+<div class="dash-search">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+type="text"
+placeholder="Search books, members, ISBN...">
+
+<kbd>
+CTRL K
+</kbd>
+
+</div>
+
+
+<div class="dash-actions">
+
+
+<button class="icon-btn">
+
+<i class="fa-regular fa-bell"></i>
+
+<span></span>
+
+</button>
+
+
+<div class="header-profile">
+
+<span>
+PK
+</span>
+
+<div>
+
+<strong>
+Piyush Kulkarni
+</strong>
+
+<small>
+Administrator
+</small>
+
+</div>
+
+<i class="fa-solid fa-chevron-down"></i>
+
+</div>
+
+
+</div>
+
+</header>
+
+
+<div class="dashboard-content">
+
+
+<!-- WELCOME -->
+
+<div class="dash-welcome">
+
+
+<div>
+
+<div class="eyebrow">
+AUGUST 24, 2026
+</div>
+
+<h1>
+Good evening, Piyush 👋
+</h1>
+
+<p>
+Here's what's happening in your library today.
+</p>
+
+</div>
+
+
+<button class="btn btn-primary">
+
+<i class="fa-solid fa-plus"></i>
+
+Add New Book
+
+</button>
+
+</div>
+
+
+<!-- METRICS -->
+
+<section class="metric-grid">
+
+
+<article class="metric-card">
+
+<div class="metric-top">
+
+<span class="metric-icon">
+
+<i class="fa-solid fa-book"></i>
+
+</span>
+
+<span class="trend positive">
+↑ 8.2%
+</span>
+
+</div>
+
+<small>
+Total books
+</small>
+
+<strong>
+12,450
+</strong>
+
+<p>
+vs. 11,510 last month
+</p>
+
+</article>
+
+
+<article class="metric-card">
+
+<div class="metric-top">
+
+<span class="metric-icon violet">
+
+<i class="fa-solid fa-users"></i>
+
+</span>
+
+<span class="trend positive">
+↑ 5.7%
+</span>
+
+</div>
+
+<small>
+Active members
+</small>
+
+<strong>
+1,284
+</strong>
+
+<p>
+vs. 1,215 last month
+</p>
+
+</article>
+
+
+<article class="metric-card">
+
+<div class="metric-top">
+
+<span class="metric-icon green">
+
+<i class="fa-solid fa-arrow-right-arrow-left"></i>
+
+</span>
+
+<span class="trend positive">
+↑ 12.4%
+</span>
+
+</div>
+
+<small>
+Books issued
+</small>
+
+<strong>
+342
+</strong>
+
+<p>
+vs. 304 last month
+</p>
+
+</article>
+
+
+<article class="metric-card">
+
+<div class="metric-top">
+
+<span class="metric-icon amber">
+
+<i class="fa-solid fa-triangle-exclamation"></i>
+
+</span>
+
+<span class="trend negative">
+↑ 2.1%
+</span>
+
+</div>
+
+<small>
+Overdue books
+</small>
+
+<strong>
+47
+</strong>
+
+<p>
+12 need immediate attention
+</p>
+
+</article>
+
+</section>
+
+
+<!-- CHART + POPULAR -->
+
+<section class="dashboard-grid">
+
+
+<article class="panel chart-panel">
+
+
+<div class="panel-head">
+
+<div>
+
+<h3>
+Borrowing activity
+</h3>
+
+<p>
+Monthly issue & return overview
+</p>
+
+</div>
+
+
+<select>
+
+<option>
+Last 7 months
+</option>
+
+<option>
+Last 12 months
+</option>
+
+</select>
+
+</div>
+
+
+<div class="big-chart">
+
+<div class="y-axis">
+
+<span>500</span>
+<span>400</span>
+<span>300</span>
+<span>200</span>
+<span>100</span>
+<span>0</span>
+
+</div>
+
+
+<div class="chart-area">
+
+
+<div class="grid-lines">
+
+<i></i>
+<i></i>
+<i></i>
+<i></i>
+<i></i>
+
+</div>
+
+
+<svg
+viewBox="0 0 700 260"
+preserveAspectRatio="none"
+class="line-chart">
+
+<path
+d="M0,188 C70,170 85,195 135,148 S205,160 250,120 S325,148 365,105 S430,115 475,82 S540,100 585,55 S650,78 700,34"
+fill="none"
+stroke="currentColor"
+stroke-width="4"/>
+
+
+<path
+d="M0,218 C75,205 90,220 135,190 S205,205 250,180 S325,200 365,165 S430,180 475,148 S540,160 585,130 S650,145 700,118"
+fill="none"
+stroke="currentColor"
+stroke-width="3"
+opacity=".25"/>
+
+</svg>
+
+
+<div class="x-axis">
+
+<span>Feb</span>
+<span>Mar</span>
+<span>Apr</span>
+<span>May</span>
+<span>Jun</span>
+<span>Jul</span>
+<span>Aug</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="legend">
+
+<span>
+<i class="legend-dot"></i>
+Books issued
+</span>
+
+<span>
+<i class="legend-dot second"></i>
+Books returned
+</span>
+
+</div>
+
+</article>
+
+
+<article class="panel popular-panel">
+
+
+<div class="panel-head">
+
+<div>
+
+<h3>
+Popular books
+</h3>
+
+<p>
+Most borrowed this month
+</p>
+
+</div>
+
+<a href="#">
+View all
+</a>
+
+</div>
+
+
+<div class="popular-list">
+
+
+<div class="popular-row">
+
+<span class="rank">
+01
+</span>
+
+<div class="tiny-cover cover-a">
+ATOMIC<br>HABITS
+</div>
+
+<div>
+
+<strong>
+Atomic Habits
+</strong>
+
+<small>
+James Clear
+</small>
+
+</div>
+
+<b>
+128
+</b>
+
+</div>
+
+
+<div class="popular-row">
+
+<span class="rank">
+02
+</span>
+
+<div class="tiny-cover cover-b">
+CLEAN<br>CODE
+</div>
+
+<div>
+
+<strong>
+Clean Code
+</strong>
+
+<small>
+Robert C. Martin
+</small>
+
+</div>
+
+<b>
+114
+</b>
+
+</div>
+
+
+<div class="popular-row">
+
+<span class="rank">
+03
+</span>
+
+<div class="tiny-cover cover-c">
+THE<br>ALCHEMIST
+</div>
+
+<div>
+
+<strong>
+The Alchemist
+</strong>
+
+<small>
+Paulo Coelho
+</small>
+
+</div>
+
+<b>
+97
+</b>
+
+</div>
+
+
+<div class="popular-row">
+
+<span class="rank">
+04
+</span>
+
+<div class="tiny-cover cover-d">
+IKIGAI
+</div>
+
+<div>
+
+<strong>
+Ikigai
+</strong>
+
+<small>
+Héctor García
+</small>
+
+</div>
+
+<b>
+86
+</b>
+
+</div>
+
+
+</div>
+
+</article>
+
+</section>
+
+
+<!-- TRANSACTIONS -->
+
+<section class="panel transactions-panel">
+
+
+<div class="panel-head">
+
+<div>
+
+<h3>
+Recent Transactions
+</h3>
+
+<p>
+Latest library activity
+</p>
+
+</div>
+
+<a href="#">
+View all transactions
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+
+</div>
+
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Member</th>
+<th>Book</th>
+<th>Type</th>
+<th>Date</th>
+<th>Due Date</th>
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+
+<tr>
+
+<td>
+
+<span class="table-user">
+RM
+</span>
+
+<div class="cell-person">
+
+<strong>
+Rahul Mehta
+</strong>
+
+<small>
+LIB-10482
+</small>
+
+</div>
+
+</td>
+
+
+<td>
+
+<strong>
+Atomic Habits
+</strong>
+
+<small>
+ISBN 978-0735211292
+</small>
+
+</td>
+
+
+<td>
+
+<span class="type issue">
+Issue
+</span>
+
+</td>
+
+
+<td>
+Aug 24, 2026
+</td>
+
+
+<td>
+Aug 31, 2026
+</td>
+
+
+<td>
+
+<span class="status active">
+Active
+</span>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+
+<span class="table-user purple">
+AS
+</span>
+
+<div class="cell-person">
+
+<strong>
+Ananya Shah
+</strong>
+
+<small>
+LIB-10317
+</small>
+
+</div>
+
+</td>
+
+
+<td>
+
+<strong>
+Clean Code
+</strong>
+
+<small>
+ISBN 978-0132350884
+</small>
+
+</td>
+
+
+<td>
+
+<span class="type return">
+Return
+</span>
+
+</td>
+
+
+<td>
+Aug 24, 2026
+</td>
+
+
+<td>
+—
+</td>
+
+
+<td>
+
+<span class="status completed">
+Completed
+</span>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+
+<span class="table-user green">
+VK
+</span>
+
+<div class="cell-person">
+
+<strong>
+Vikram Kumar
+</strong>
+
+<small>
+LIB-10892
+</small>
+
+</div>
+
+</td>
+
+
+<td>
+
+<strong>
+Deep Work
+</strong>
+
+<small>
+ISBN 978-1455586691
+</small>
+
+</td>
+
+
+<td>
+
+<span class="type issue">
+Issue
+</span>
+
+</td>
+
+
+<td>
+Aug 23, 2026
+</td>
+
+
+<td>
+Aug 30, 2026
+</td>
+
+
+<td>
+
+<span class="status active">
+Active
+</span>
+
+</td>
+
+</tr>
+
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+</div>
+
+</main>
+
+</div>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>

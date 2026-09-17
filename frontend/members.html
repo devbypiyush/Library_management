@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Members | Libraria Library Management</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #f5f7fb;
+            --sidebar: #111827;
+            --sidebar-light: #1f2937;
+
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+
+            --text: #111827;
+            --muted: #6b7280;
+
+            --border: #e5e7eb;
+            --white: #ffffff;
+
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+
+            --shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            outline: none;
+        }
+
+        /* =========================
+           LAYOUT
+        ========================= */
+
+        .app {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar);
+            color: white;
+
+            min-height: 100vh;
+
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            z-index: 100;
+
+            transition: 0.3s ease;
+        }
+
+        .brand {
+            height: 80px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 25px;
+
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 11px;
+
+            background: linear-gradient(
+                135deg,
+                #6366f1,
+                #8b5cf6
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            margin-right: 12px;
+
+            font-size: 17px;
+        }
+
+        .brand h2 {
+            font-size: 19px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .brand span {
+            color: #818cf8;
+        }
+
+        .menu-title {
+            padding: 25px 25px 12px;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            color: #6b7280;
+            letter-spacing: 0.8px;
+        }
+
+        .nav {
+            padding: 0 12px;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 12px 14px;
+
+            margin-bottom: 5px;
+
+            color: #9ca3af;
+
+            text-decoration: none;
+
+            border-radius: 9px;
+
+            font-size: 13px;
+            font-weight: 500;
+
+            transition: 0.2s;
+        }
+
+        .nav a i {
+            width: 18px;
+            text-align: center;
+        }
+
+        .nav a:hover {
+            background: var(--sidebar-light);
+            color: white;
+        }
+
+        .nav a.active {
+            background: linear-gradient(
+                135deg,
+                #6366f1,
+                #4f46e5
+            );
+
+            color: white;
+
+            box-shadow:
+                0 5px 15px rgba(79,70,229,0.25);
+        }
+
+        .sidebar-bottom {
+            position: absolute;
+            bottom: 20px;
+            left: 15px;
+            right: 15px;
+        }
+
+        .profile-mini {
+            display: flex;
+            align-items: center;
+
+            padding: 12px;
+
+            background: rgba(255,255,255,0.04);
+
+            border-radius: 10px;
+        }
+
+        .profile-avatar {
+            width: 36px;
+            height: 36px;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #6366f1,
+                #8b5cf6
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            margin-right: 10px;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-info strong {
+            font-size: 11px;
+        }
+
+        .profile-info small {
+            color: #9ca3af;
+            font-size: 9px;
+            margin-top: 3px;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            margin-left: 260px;
+            width: calc(100% - 260px);
+            min-height: 100vh;
+        }
+
+        /* =========================
+           TOPBAR
+        ========================= */
+
+        .topbar {
+            height: 80px;
+
+            background: white;
+
+            border-bottom: 1px solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 30px;
+        }
+
+        .page-title h1 {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.6px;
+        }
+
+        .page-title p {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .notification {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 9px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #f8fafc;
+
+            cursor: pointer;
+
+            position: relative;
+        }
+
+        .notification i {
+            color: #6b7280;
+        }
+
+        .notification .dot {
+            position: absolute;
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #ef4444;
+
+            top: 7px;
+            right: 7px;
+
+            border: 2px solid white;
+        }
+
+        .admin {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-avatar {
+            width: 36px;
+            height: 36px;
+
+            border-radius: 50%;
+
+            background: #eef2ff;
+
+            color: #4f46e5;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .admin-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .admin-info strong {
+            font-size: 11px;
+        }
+
+        .admin-info span {
+            color: #9ca3af;
+            font-size: 9px;
+            margin-top: 2px;
+        }
+
+        .mobile-menu {
+            display: none;
+
+            border: none;
+            background: none;
+
+            font-size: 20px;
+
+            margin-right: 15px;
+
+            cursor: pointer;
+        }
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .content {
+            padding: 30px;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            padding: 20px;
+
+            box-shadow: var(--shadow);
+
+            transition: 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .stat-icon.purple {
+            background: #eef2ff;
+            color: #6366f1;
+        }
+
+        .stat-icon.green {
+            background: #ecfdf5;
+            color: #10b981;
+        }
+
+        .stat-icon.orange {
+            background: #fff7ed;
+            color: #f59e0b;
+        }
+
+        .stat-icon.red {
+            background: #fef2f2;
+            color: #ef4444;
+        }
+
+        .stat-change {
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .stat-change.up {
+            color: var(--success);
+        }
+
+        .stat-change.warning {
+            color: var(--warning);
+        }
+
+        .stat-change.danger {
+            color: var(--danger);
+        }
+
+        .stat-card h3 {
+            margin-top: 18px;
+
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .stat-card p {
+            color: var(--muted);
+
+            font-size: 11px;
+
+            margin-top: 4px;
+        }
+
+        /* =========================
+           SECTION CARD
+        ========================= */
+
+        .section-card {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            box-shadow: var(--shadow);
+
+            overflow: hidden;
+        }
+
+        /* =========================
+           TOOLBAR
+        ========================= */
+
+        .toolbar {
+            padding: 20px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 15px;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toolbar-left {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            flex: 1;
+        }
+
+        .search {
+            position: relative;
+
+            width: 330px;
+        }
+
+        .search i {
+            position: absolute;
+
+            left: 13px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #9ca3af;
+
+            font-size: 12px;
+        }
+
+        .search input {
+            width: 100%;
+
+            height: 40px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            padding: 0 14px 0 36px;
+
+            font-size: 12px;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+        .search input:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px rgba(99,102,241,0.08);
+        }
+
+        .filter-select {
+            height: 40px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            padding: 0 12px;
+
+            background: white;
+
+            color: #374151;
+
+            font-size: 11px;
+
+            outline: none;
+
+            cursor: pointer;
+        }
+
+        .filter-select:focus {
+            border-color: var(--primary);
+        }
+
+        .btn-primary {
+            height: 40px;
+
+            padding: 0 16px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: linear-gradient(
+                135deg,
+                #6366f1,
+                #4f46e5
+            );
+
+            color: white;
+
+            font-size: 11px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            box-shadow:
+                0 5px 12px rgba(79,70,229,0.2);
+
+            transition: 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 1050px;
+        }
+
+        thead {
+            background: #f8fafc;
+        }
+
+        th {
+            padding: 14px 18px;
+
+            text-align: left;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            color: #6b7280;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.4px;
+
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 15px 18px;
+
+            border-top: 1px solid #f0f2f5;
+
+            font-size: 11px;
+
+            white-space: nowrap;
+        }
+
+        tbody tr {
+            transition: 0.2s;
+        }
+
+        tbody tr:hover {
+            background: #fafbff;
+        }
+
+        .member-info {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .member-avatar {
+            width: 34px;
+            height: 34px;
+
+            border-radius: 9px;
+
+            background: #eef2ff;
+
+            color: #4f46e5;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .member-name {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .member-name strong {
+            font-size: 11px;
+            color: #111827;
+        }
+
+        .member-name span {
+            color: #9ca3af;
+            font-size: 9px;
+        }
+
+        .email {
+            color: #4b5563;
+        }
+
+        .phone {
+            color: #4b5563;
+        }
+
+        .membership-badge,
+        .status-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 9px;
+
+            font-weight: 600;
+        }
+
+        .membership-badge.student {
+            background: #eef2ff;
+            color: #4f46e5;
+        }
+
+        .membership-badge.faculty {
+            background: #ecfdf5;
+            color: #047857;
+        }
+
+        .membership-badge.staff {
+            background: #fff7ed;
+            color: #c2410c;
+        }
+
+        .membership-badge.premium {
+            background: #fdf4ff;
+            color: #a21caf;
+        }
+
+        .status-badge.active {
+            background: #ecfdf5;
+            color: #047857;
+        }
+
+        .status-badge.suspended {
+            background: #fff7ed;
+            color: #c2410c;
+        }
+
+        .status-badge.expired {
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        .issues-count {
+            display: inline-flex;
+
+            min-width: 27px;
+            height: 27px;
+
+            padding: 0 7px;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 8px;
+
+            background: #f3f4f6;
+
+            color: #374151;
+
+            font-weight: 700;
+        }
+
+        .issues-count.has-overdue {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .expiry-normal {
+            color: #374151;
+        }
+
+        .expiry-warning {
+            color: #d97706;
+            font-weight: 600;
+        }
+
+        .expiry-danger {
+            color: #dc2626;
+            font-weight: 700;
+        }
+
+        .actions {
+            display: flex;
+            gap: 7px;
+        }
+
+        .action-btn {
+            width: 30px;
+            height: 30px;
+
+            border: 1px solid var(--border);
+
+            background: white;
+
+            border-radius: 7px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            cursor: pointer;
+
+            color: #6b7280;
+
+            transition: 0.2s;
+        }
+
+        .action-btn:hover {
+            background: #f8fafc;
+        }
+
+        .action-btn.edit:hover {
+            color: var(--primary);
+            border-color: #c7d2fe;
+        }
+
+        .action-btn.delete:hover {
+            color: var(--danger);
+            border-color: #fecaca;
+        }
+
+        .empty-row td {
+            text-align: center;
+
+            padding: 60px 20px;
+
+            color: #9ca3af;
+        }
+
+        .empty-row i {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(15,23,42,0.55);
+
+            display: none;
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+
+            z-index: 500;
+
+            backdrop-filter: blur(3px);
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 650px;
+
+            background: white;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 25px 70px rgba(15,23,42,0.25);
+
+            overflow: hidden;
+
+            animation: modalIn 0.2s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+
+            border-bottom: 1px solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-header h2 {
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .modal-header p {
+            color: var(--muted);
+            font-size: 10px;
+            margin-top: 4px;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+
+            border: none;
+
+            background: #f3f4f6;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            color: #6b7280;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 17px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+
+            gap: 7px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 10px;
+
+            font-weight: 700;
+
+            color: #374151;
+        }
+
+        .form-group label span {
+            color: #ef4444;
+        }
+
+        .form-control {
+            height: 40px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            padding: 0 12px;
+
+            font-size: 11px;
+
+            outline: none;
+
+            background: white;
+
+            transition: 0.2s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px rgba(99,102,241,0.08);
+        }
+
+        .modal-footer {
+            padding: 17px 24px;
+
+            border-top: 1px solid var(--border);
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 10px;
+        }
+
+        .btn-secondary {
+            height: 40px;
+
+            padding: 0 16px;
+
+            border: 1px solid var(--border);
+
+            background: white;
+
+            border-radius: 8px;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            color: #4b5563;
+
+            cursor: pointer;
+        }
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        .toast {
+            position: fixed;
+
+            right: 25px;
+            bottom: 25px;
+
+            min-width: 280px;
+
+            padding: 14px 17px;
+
+            background: #111827;
+
+            color: white;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 15px 40px rgba(15,23,42,0.2);
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 11px;
+
+            transform: translateY(100px);
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition: 0.3s;
+
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            color: #34d399;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1100px) {
+
+            .stats {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 850px) {
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .topbar {
+                padding: 0 18px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .admin-info,
+            .admin > i {
+                display: none;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .toolbar {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .toolbar-left {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search {
+                width: 100%;
+            }
+
+            .filter-select {
+                width: 100%;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .top-actions {
+                gap: 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+
+            <h2>
+                Lib<span>raria</span>
+            </h2>
+
+        </div>
+
+        <div class="menu-title">
+            Main Menu
+        </div>
+
+        <nav class="nav">
+
+            <a href="dashboard.html">
+                <i class="fa-solid fa-grid-2"></i>
+                Dashboard
+            </a>
+
+            <a href="books.html">
+                <i class="fa-solid fa-book"></i>
+                Books
+            </a>
+
+            <a href="members.html" class="active">
+                <i class="fa-solid fa-users"></i>
+                Members
+            </a>
+
+            <a href="issue-books.html">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                Issue Books
+            </a>
+
+            <a href="returns.html">
+                <i class="fa-solid fa-arrow-left"></i>
+                Returns
+            </a>
+
+            <a href="reservations.html">
+                <i class="fa-solid fa-calendar-check"></i>
+                Reservations
+            </a>
+
+        </nav>
+
+        <div class="menu-title">
+            Management
+        </div>
+
+        <nav class="nav">
+
+            <a href="categories.html">
+                <i class="fa-solid fa-layer-group"></i>
+                Categories
+            </a>
+
+            <a href="authors.html">
+                <i class="fa-solid fa-pen-nib"></i>
+                Authors
+            </a>
+
+            <a href="reports.html">
+                <i class="fa-solid fa-chart-line"></i>
+                Reports
+            </a>
+
+            <a href="settings.html">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="profile-mini">
+
+                <div class="profile-avatar">
+                    PK
+                </div>
+
+                <div class="profile-info">
+                    <strong>Piyush Kulkarni</strong>
+                    <small>Administrator</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div style="display:flex;align-items:center;">
+
+                <button
+                    type="button"
+                    class="mobile-menu"
+                    onclick="toggleSidebar()">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+                <div class="page-title">
+
+                    <h1>Members</h1>
+
+                    <p>
+                        Manage Libraria members and memberships
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="top-actions">
+
+                <div
+                    class="notification"
+                    onclick="showToast('You have new library notifications.')">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="dot"></span>
+
+                </div>
+
+
+                <div class="admin">
+
+                    <div class="admin-avatar">
+                        PK
+                    </div>
+
+                    <div class="admin-info">
+
+                        <strong>
+                            Piyush Kulkarni
+                        </strong>
+
+                        <span>
+                            Administrator
+                        </span>
+
+                    </div>
+
+                    <i
+                        class="fa-solid fa-chevron-down"
+                        style="font-size:10px;color:#9ca3af;">
+                    </i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <section class="content">
+
+
+            <!-- ================= STATS ================= -->
+
+            <div class="stats">
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon purple">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        <span class="stat-change up">
+                            Members
+                        </span>
+
+                    </div>
+
+                    <h3 id="totalMembers">
+                        0
+                    </h3>
+
+                    <p>
+                        Total Members
+                    </p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+
+                        <span class="stat-change up">
+                            Active
+                        </span>
+
+                    </div>
+
+                    <h3 id="activeMembers">
+                        0
+                    </h3>
+
+                    <p>
+                        Active Members
+                    </p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon orange">
+                            <i class="fa-solid fa-user-clock"></i>
+                        </div>
+
+                        <span class="stat-change warning">
+                            Attention
+                        </span>
+
+                    </div>
+
+                    <h3 id="suspendedMembers">
+                        0
+                    </h3>
+
+                    <p>
+                        Suspended Members
+                    </p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon red">
+                            <i class="fa-solid fa-user-xmark"></i>
+                        </div>
+
+                        <span class="stat-change danger">
+                            Expired
+                        </span>
+
+                    </div>
+
+                    <h3 id="expiredMembers">
+                        0
+                    </h3>
+
+                    <p>
+                        Expired Members
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= MEMBER TABLE ================= -->
+
+            <div class="section-card">
+
+                <div class="toolbar">
+
+                    <div class="toolbar-left">
+
+                        <div class="search">
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                            <input
+                                type="text"
+                                id="searchInput"
+                                placeholder="Search by name, email, member ID..."
+                                oninput="filterMembers()">
+
+                        </div>
+
+
+                        <select
+                            class="filter-select"
+                            id="membershipFilter"
+                            onchange="filterMembers()">
+
+                            <option value="all">
+                                All Types
+                            </option>
+
+                            <option value="Student">
+                                Student
+                            </option>
+
+                            <option value="Faculty">
+                                Faculty
+                            </option>
+
+                            <option value="Staff">
+                                Staff
+                            </option>
+
+                            <option value="Premium">
+                                Premium
+                            </option>
+
+                        </select>
+
+
+                        <select
+                            class="filter-select"
+                            id="statusFilter"
+                            onchange="filterMembers()">
+
+                            <option value="all">
+                                All Status
+                            </option>
+
+                            <option value="Active">
+                                Active
+                            </option>
+
+                            <option value="Suspended">
+                                Suspended
+                            </option>
+
+                            <option value="Expired">
+                                Expired
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="btn-primary"
+                        onclick="openAddModal()">
+
+                        <i class="fa-solid fa-plus"></i>
+
+                        Add Member
+
+                    </button>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Member</th>
+
+                                <th>Email</th>
+
+                                <th>Phone</th>
+
+                                <th>Membership</th>
+
+                                <th>Joined</th>
+
+                                <th>Expiry</th>
+
+                                <th>Issues</th>
+
+                                <th>Status</th>
+
+                                <th>Actions</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="memberTable">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= MEMBER MODAL ================= -->
+
+<div
+    class="modal-overlay"
+    id="memberModal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2 id="modalTitle">
+                    Add New Member
+                </h2>
+
+                <p>
+                    Enter member information below
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                class="modal-close"
+                onclick="closeModal()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <form id="memberForm">
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Member ID <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="memberCode"
+                            class="form-control"
+                            placeholder="e.g. LIB-001"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Full Name <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="memberName"
+                            class="form-control"
+                            placeholder="Enter full name"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Email <span>*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            id="memberEmail"
+                            class="form-control"
+                            placeholder="member@example.com"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Phone
+                        </label>
+
+                        <input
+                            type="text"
+                            id="memberPhone"
+                            class="form-control"
+                            placeholder="+91 XXXXX XXXXX">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Membership Type
+                        </label>
+
+                        <select
+                            id="membershipType"
+                            class="form-control">
+
+                            <option value="Student">
+                                Student
+                            </option>
+
+                            <option value="Faculty">
+                                Faculty
+                            </option>
+
+                            <option value="Staff">
+                                Staff
+                            </option>
+
+                            <option value="Premium">
+                                Premium
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Membership Status
+                        </label>
+
+                        <select
+                            id="membershipStatus"
+                            class="form-control">
+
+                            <option value="Active">
+                                Active
+                            </option>
+
+                            <option value="Suspended">
+                                Suspended
+                            </option>
+
+                            <option value="Expired">
+                                Expired
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Joined Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="joinedDate"
+                            class="form-control">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Expiry Date <span>*</span>
+                        </label>
+
+                        <input
+                            type="date"
+                            id="expiryDate"
+                            class="form-control"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Issue Limit
+                        </label>
+
+                        <input
+                            type="number"
+                            id="issueLimit"
+                            class="form-control"
+                            value="3"
+                            min="1"
+                            max="50">
+
+                    </div>
+
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                class="btn-secondary"
+                onclick="closeModal()">
+
+                Cancel
+
+            </button>
+
+            <button
+                type="button"
+                id="saveButton"
+                class="btn-primary"
+                onclick="saveMember()">
+
+                <i class="fa-solid fa-check"></i>
+
+                Save Member
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= TOAST ================= -->
+
+<div
+    class="toast"
+    id="toast">
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    <span id="toastMessage">
+        Success
+    </span>
+
+</div>
+
+
+<script src="js/members.js"></script>
+
+</body>
+
+</html>

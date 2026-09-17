@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Books | Libraria Library Management</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #f5f7fb;
+            --sidebar: #111827;
+            --sidebar-light: #1f2937;
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --text: #111827;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --white: #ffffff;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            outline: none;
+        }
+
+
+        /* =========================
+           LAYOUT
+        ========================= */
+
+        .app {
+            display: flex;
+            min-height: 100vh;
+        }
+
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar);
+            color: white;
+            min-height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 100;
+            transition: 0.3s ease;
+        }
+
+        .brand {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            padding: 0 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 12px;
+            font-size: 17px;
+        }
+
+        .brand h2 {
+            font-size: 19px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .brand span {
+            color: #818cf8;
+        }
+
+        .menu-title {
+            padding: 25px 25px 12px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+
+        .nav {
+            padding: 0 13px;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            color: #9ca3af;
+            text-decoration: none;
+            padding: 12px 13px;
+            margin-bottom: 4px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .nav a i {
+            width: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .nav a:hover {
+            background: rgba(255,255,255,0.05);
+            color: white;
+        }
+
+        .nav a.active {
+            background: linear-gradient(
+                90deg,
+                rgba(99,102,241,0.25),
+                rgba(99,102,241,0.08)
+            );
+            color: white;
+        }
+
+        .nav a.active i {
+            color: #818cf8;
+        }
+
+        .sidebar-bottom {
+            position: absolute;
+            bottom: 20px;
+            left: 13px;
+            right: 13px;
+        }
+
+        .profile-mini {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .profile-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .profile-info strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .profile-info small {
+            color: #6b7280;
+            font-size: 10px;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            margin-left: 260px;
+            width: calc(100% - 260px);
+        }
+
+
+        /* =========================
+           TOPBAR
+        ========================= */
+
+        .topbar {
+            height: 80px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .page-title h1 {
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .page-title p {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .notification {
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4b5563;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .notification:hover {
+            color: var(--primary);
+            border-color: #c7d2fe;
+            background: #f8f9ff;
+        }
+
+        .notification .dot {
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--danger);
+            top: 8px;
+            right: 8px;
+            border: 2px solid white;
+        }
+
+        .admin {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-avatar {
+            width: 38px;
+            height: 38px;
+            background: #eef2ff;
+            color: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .admin-info strong {
+            font-size: 12px;
+            display: block;
+        }
+
+        .admin-info span {
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .content {
+            padding: 30px 32px;
+        }
+
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 35px rgba(15, 23, 42, 0.09);
+        }
+
+        .stat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 11px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 15px;
+        }
+
+        .purple {
+            background: #eef2ff;
+            color: #6366f1;
+        }
+
+        .green {
+            background: #ecfdf5;
+            color: #10b981;
+        }
+
+        .orange {
+            background: #fffbeb;
+            color: #f59e0b;
+        }
+
+        .red {
+            background: #fef2f2;
+            color: #ef4444;
+        }
+
+        .stat-card h3 {
+            font-size: 25px;
+            margin-top: 15px;
+            letter-spacing: -1px;
+        }
+
+        .stat-card p {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .stat-change {
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .up {
+            color: var(--success);
+        }
+
+        .down {
+            color: var(--danger);
+        }
+
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        .section-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+
+        /* =========================
+           TOOLBAR
+        ========================= */
+
+        .toolbar {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toolbar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .search {
+            position: relative;
+            max-width: 310px;
+            width: 100%;
+        }
+
+        .search i {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 13px;
+        }
+
+        .search input {
+            width: 100%;
+            height: 40px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            padding: 0 15px 0 37px;
+            outline: none;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+
+        .search input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.08);
+        }
+
+        select {
+            height: 40px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            padding: 0 12px;
+            color: #4b5563;
+            font-size: 12px;
+            outline: none;
+            background: white;
+            cursor: pointer;
+        }
+
+        select:focus {
+            border-color: var(--primary);
+        }
+
+        .add-btn {
+            border: none;
+            height: 40px;
+            padding: 0 17px;
+            background: linear-gradient(
+                135deg,
+                var(--primary),
+                #8b5cf6
+            );
+            color: white;
+            border-radius: 9px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(99,102,241,0.2);
+            transition: 0.2s;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(99,102,241,0.3);
+        }
+
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th {
+            background: #fafafa;
+            color: #6b7280;
+            text-transform: uppercase;
+            font-size: 9px;
+            letter-spacing: 0.6px;
+            font-weight: 700;
+            text-align: left;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f1f3;
+            font-size: 12px;
+            vertical-align: middle;
+        }
+
+        tr:hover td {
+            background: #fafbff;
+        }
+
+        .book-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .book-cover {
+            width: 38px;
+            height: 48px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 14px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+            flex-shrink: 0;
+        }
+
+        .cover-1 {
+            background: linear-gradient(135deg, #4338ca, #6366f1);
+        }
+
+        .cover-2 {
+            background: linear-gradient(135deg, #047857, #10b981);
+        }
+
+        .cover-3 {
+            background: linear-gradient(135deg, #b45309, #f59e0b);
+        }
+
+        .cover-4 {
+            background: linear-gradient(135deg, #be123c, #f43f5e);
+        }
+
+        .cover-5 {
+            background: linear-gradient(135deg, #0369a1, #0ea5e9);
+        }
+
+        .cover-6 {
+            background: linear-gradient(135deg, #7e22ce, #a855f7);
+        }
+
+        .book-name strong {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .book-name span {
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        .isbn {
+            color: #4b5563;
+            font-family: monospace;
+            font-size: 11px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+        .available {
+            color: #047857;
+            background: #ecfdf5;
+        }
+
+        .borrowed {
+            color: #b45309;
+            background: #fffbeb;
+        }
+
+        .unavailable {
+            color: #b91c1c;
+            background: #fef2f2;
+        }
+
+        .actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .action-btn {
+            width: 31px;
+            height: 31px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 7px;
+            cursor: pointer;
+            color: #6b7280;
+            transition: 0.2s;
+        }
+
+        .action-btn:hover {
+            border-color: #c7d2fe;
+            color: var(--primary);
+            background: #eef2ff;
+        }
+
+        .delete-btn:hover {
+            border-color: #fecaca;
+            color: var(--danger);
+            background: #fef2f2;
+        }
+
+
+        /* =========================
+           TABLE FOOTER
+        ========================= */
+
+        .table-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+        }
+
+        .table-footer p {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .pagination {
+            display: flex;
+            gap: 5px;
+        }
+
+        .page-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 7px;
+            font-size: 11px;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .page-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15,23,42,0.55);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            border-radius: 17px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+            animation: modalIn 0.25s ease;
+        }
+
+        @keyframes modalIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-header h2 {
+            font-size: 17px;
+        }
+
+        .close {
+            border: none;
+            background: #f3f4f6;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .close:hover {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 17px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group.full {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group select {
+            height: 41px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0 12px;
+            outline: none;
+            font-size: 12px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.08);
+        }
+
+        .modal-footer {
+            padding: 17px 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .cancel-btn {
+            height: 39px;
+            padding: 0 17px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .save-btn {
+            height: 39px;
+            padding: 0 19px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .save-btn:hover {
+            background: var(--primary-dark);
+        }
+
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        .toast {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            min-width: 280px;
+            background: #111827;
+            color: white;
+            padding: 14px 17px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.18);
+            transform: translateY(100px);
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s ease;
+            z-index: 2000;
+            font-size: 12px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            color: #34d399;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        .mobile-menu {
+            display: none;
+            border: none;
+            background: transparent;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+
+        @media(max-width:1100px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media(max-width:800px) {
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+                box-shadow: 10px 0 40px rgba(0,0,0,0.2);
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .mobile-menu {
+                display: block;
+                margin-right: 15px;
+            }
+
+            .topbar {
+                padding: 0 18px;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .toolbar-left {
+                flex-direction: column;
+            }
+
+            .search {
+                max-width: none;
+            }
+
+            .toolbar select {
+                width: 100%;
+            }
+
+            .add-btn {
+                justify-content: center;
+            }
+
+            .admin-info {
+                display: none;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: span 1;
+            }
+
+        }
+
+
+        @media(max-width:500px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title h1 {
+                font-size: 17px;
+            }
+
+            .page-title p {
+                display: none;
+            }
+
+            .notification {
+                display: none;
+            }
+
+            .table-footer {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .pagination {
+                flex-wrap: wrap;
+            }
+
+            .modal-body {
+                padding: 18px;
+            }
+
+            .modal-header,
+            .modal-footer {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+
+            <h2>Lib<span>raria</span></h2>
+
+        </div>
+
+
+        <div class="menu-title">
+            Main Menu
+        </div>
+
+
+        <nav class="nav">
+
+            <a href="dashboard.html">
+                <i class="fa-solid fa-grid-2"></i>
+                Dashboard
+            </a>
+
+
+            <a href="books.html" class="active">
+                <i class="fa-solid fa-book"></i>
+                Books
+            </a>
+
+
+            <a href="members.html">
+                <i class="fa-solid fa-users"></i>
+                Members
+            </a>
+
+
+            <a href="issue-books.html">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                Issue Books
+            </a>
+
+
+            <a href="returns.html">
+                <i class="fa-solid fa-arrow-left"></i>
+                Returns
+            </a>
+
+
+            <a href="reservations.html">
+                <i class="fa-solid fa-calendar-check"></i>
+                Reservations
+            </a>
+
+        </nav>
+
+
+        <div class="menu-title">
+            Management
+        </div>
+
+
+        <nav class="nav">
+
+            <a href="categories.html">
+                <i class="fa-solid fa-layer-group"></i>
+                Categories
+            </a>
+
+
+            <a href="authors.html">
+                <i class="fa-solid fa-pen-nib"></i>
+                Authors
+            </a>
+
+
+            <a href="reports.html">
+                <i class="fa-solid fa-chart-line"></i>
+                Reports
+            </a>
+
+
+            <a href="settings.html">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="profile-mini">
+
+                <div class="profile-avatar">
+                    PK
+                </div>
+
+                <div class="profile-info">
+                    <strong>Piyush Kulkarni</strong>
+                    <small>Administrator</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div style="display:flex;align-items:center;">
+
+                <button
+                    class="mobile-menu"
+                    onclick="toggleSidebar()">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div class="page-title">
+
+                    <h1>Books</h1>
+
+                    <p>
+                        Manage and organize your Libraria collection
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="top-actions">
+
+                <div
+                    class="notification"
+                    onclick="showToast('You have new library notifications.')">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="dot"></span>
+
+                </div>
+
+
+                <div class="admin">
+
+                    <div class="admin-avatar">
+                        PK
+                    </div>
+
+                    <div class="admin-info">
+
+                        <strong>Piyush Kulkarni</strong>
+
+                        <span>Administrator</span>
+
+                    </div>
+
+                    <i
+                        class="fa-solid fa-chevron-down"
+                        style="font-size:10px;color:#9ca3af;">
+                    </i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <section class="content">
+
+
+            <!-- STATISTICS -->
+
+            <div class="stats">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon purple">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+
+                        <span class="stat-change up">
+                            Library
+                        </span>
+
+                    </div>
+
+                    <h3 id="totalBooks">
+                        0
+                    </h3>
+
+                    <p>
+                        Total Books
+                    </p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+
+                        <span class="stat-change up">
+                            Available
+                        </span>
+
+                    </div>
+
+                    <h3 id="availableBooks">
+                        0
+                    </h3>
+
+                    <p>
+                        Available Books
+                    </p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon orange">
+                            <i class="fa-solid fa-book-open-reader"></i>
+                        </div>
+
+                        <span class="stat-change up">
+                            Active
+                        </span>
+
+                    </div>
+
+                    <h3 id="issuedBooks">
+                        0
+                    </h3>
+
+                    <p>
+                        Currently Issued
+                    </p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon red">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+
+                        <span class="stat-change down">
+                            Attention
+                        </span>
+
+                    </div>
+
+                    <h3 id="overdueBooks">
+                        0
+                    </h3>
+
+                    <p>
+                        Overdue Books
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ================= BOOK TABLE ================= -->
+
+            <div class="section-card">
+
+
+                <!-- TOOLBAR -->
+
+                <div class="toolbar">
+
+
+                    <div class="toolbar-left">
+
+
+                        <!-- SEARCH -->
+
+                        <div class="search">
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                            <input
+                                type="text"
+                                id="searchInput"
+                                placeholder="Search by title, author or ISBN..."
+                                oninput="filterBooks()">
+
+                        </div>
+
+
+                        <!-- CATEGORY -->
+
+                        <select
+                            id="categoryFilter"
+                            onchange="filterBooks()">
+
+                            <option value="all">
+                                All Categories
+                            </option>
+
+                            <option value="fiction">
+                                Fiction
+                            </option>
+
+                            <option value="technology">
+                                Technology
+                            </option>
+
+                            <option value="business">
+                                Business
+                            </option>
+
+                            <option value="science">
+                                Science
+                            </option>
+
+                            <option value="history">
+                                History
+                            </option>
+
+                            <option value="biography">
+                                Biography
+                            </option>
+
+                        </select>
+
+
+                        <!-- STATUS -->
+
+                        <select
+                            id="statusFilter"
+                            onchange="filterBooks()">
+
+                            <option value="all">
+                                All Status
+                            </option>
+
+                            <option value="available">
+                                Available
+                            </option>
+
+                            <option value="borrowed">
+                                Borrowed
+                            </option>
+
+                            <option value="unavailable">
+                                Unavailable
+                            </option>
+
+                        </select>
+
+
+                    </div>
+
+
+                    <!-- ADD BOOK -->
+
+                    <button
+                        class="add-btn"
+                        onclick="openAddModal()">
+
+                        <i class="fa-solid fa-plus"></i>
+
+                        Add New Book
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- ================= TABLE ================= -->
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Book</th>
+
+                                <th>ISBN</th>
+
+                                <th>Category</th>
+
+                                <th>Author</th>
+
+                                <th>Copies</th>
+
+                                <th>Status</th>
+
+                                <th>Actions</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <!-- IMPORTANT:
+                             JS uses this ID -->
+
+                        <tbody id="bookTable">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- TABLE FOOTER -->
+
+                <div class="table-footer">
+
+                    <p class="result-text">
+                        Showing 0 books
+                    </p>
+
+
+                    <div class="pagination">
+
+                        <button class="page-btn active">
+                            1
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =========================================================
+     ADD / EDIT BOOK MODAL
+     ========================================================= -->
+
+<div
+    class="modal-overlay"
+    id="bookModal">
+
+
+    <div class="modal">
+
+
+        <!-- MODAL HEADER -->
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Add New Book
+            </h2>
+
+
+            <button
+                class="close"
+                type="button"
+                onclick="closeModal()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- MODAL BODY -->
+
+        <div class="modal-body">
+
+            <form id="bookForm">
+
+                <div class="form-grid">
+
+
+                    <!-- TITLE -->
+
+                    <div class="form-group full">
+
+                        <label for="bookTitle">
+                            Book Title
+                        </label>
+
+                        <input
+                            type="text"
+                            id="bookTitle"
+                            placeholder="Enter book title"
+                            required>
+
+                    </div>
+
+
+                    <!-- AUTHOR -->
+
+                    <div class="form-group">
+
+                        <label for="bookAuthor">
+                            Author
+                        </label>
+
+                        <input
+                            type="text"
+                            id="bookAuthor"
+                            placeholder="Enter author name"
+                            required>
+
+                    </div>
+
+
+                    <!-- ISBN -->
+
+                    <div class="form-group">
+
+                        <label for="bookISBN">
+                            ISBN
+                        </label>
+
+                        <input
+                            type="text"
+                            id="bookISBN"
+                            placeholder="Enter ISBN"
+                            required>
+
+                    </div>
+
+
+                    <!-- CATEGORY -->
+
+                    <div class="form-group">
+
+                        <label for="bookCategory">
+                            Category
+                        </label>
+
+                        <select
+                            id="bookCategory"
+                            required>
+
+                            <option value="">
+                                Select Category
+                            </option>
+
+                            <option value="fiction">
+                                Fiction
+                            </option>
+
+                            <option value="technology">
+                                Technology
+                            </option>
+
+                            <option value="business">
+                                Business
+                            </option>
+
+                            <option value="science">
+                                Science
+                            </option>
+
+                            <option value="history">
+                                History
+                            </option>
+
+                            <option value="biography">
+                                Biography
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- COPIES -->
+
+                    <div class="form-group">
+
+                        <label for="bookCopies">
+                            Total Copies
+                        </label>
+
+                        <input
+                            type="number"
+                            id="bookCopies"
+                            min="1"
+                            value="1"
+                            required>
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <div class="form-group full">
+
+                        <label for="bookStatus">
+                            Status
+                        </label>
+
+                        <select
+                            id="bookStatus"
+                            disabled>
+
+                            <option value="available">
+                                Available
+                            </option>
+
+                            <option value="borrowed">
+                                Borrowed
+                            </option>
+
+                            <option value="unavailable">
+                                Unavailable
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- MODAL FOOTER -->
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                class="cancel-btn"
+                onclick="closeModal()">
+
+                Cancel
+
+            </button>
+
+
+            <button
+                type="button"
+                class="save-btn"
+                onclick="saveBook()">
+
+                <i class="fa-solid fa-check"></i>
+
+                Save Book
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     TOAST
+     ========================================================= -->
+
+<div
+    class="toast"
+    id="toast">
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    <span id="toastMessage">
+        Success
+    </span>
+
+</div>
+
+
+
+<!-- =========================================================
+     IMPORTANT
+     ONLY LOAD books.js
+     ========================================================= -->
+
+<script src="js/books.js"></script>
+
+
+</body>
+</html>

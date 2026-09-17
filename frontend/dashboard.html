@@ -1,0 +1,2745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Libraria Library Management</title>
+
+    <!-- Google Font -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =====================================================
+           VARIABLES
+        ===================================================== */
+
+        :root {
+
+            --bg: #f5f7fb;
+
+            --sidebar: #111827;
+
+            --primary: #6366f1;
+
+            --primary-dark: #4f46e5;
+
+            --text: #111827;
+
+            --muted: #6b7280;
+
+            --border: #e5e7eb;
+
+            --white: #ffffff;
+
+            --success: #10b981;
+
+            --danger: #ef4444;
+
+            --warning: #f59e0b;
+
+            --shadow:
+                0 10px 30px rgba(15,23,42,0.06);
+
+        }
+
+
+        body {
+
+            font-family: "Inter", sans-serif;
+
+            background: var(--bg);
+
+            color: var(--text);
+
+        }
+
+
+        button,
+        input,
+        select {
+
+            font-family: inherit;
+
+        }
+
+
+        /* =====================================================
+           APP
+        ===================================================== */
+
+        .app {
+
+            display: flex;
+
+            min-height: 100vh;
+
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+
+            width: 260px;
+
+            background: var(--sidebar);
+
+            color: white;
+
+            min-height: 100vh;
+
+            position: fixed;
+
+            left: 0;
+
+            top: 0;
+
+            bottom: 0;
+
+            z-index: 100;
+
+            transition: 0.3s;
+
+        }
+
+
+        .brand {
+
+            height: 80px;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 25px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,.06);
+
+        }
+
+
+        .brand-icon {
+
+            width: 38px;
+
+            height: 38px;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #8b5cf6
+                );
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            margin-right: 12px;
+
+        }
+
+
+        .brand-icon i {
+
+            font-size: 16px;
+
+        }
+
+
+        .brand h2 {
+
+            font-size: 19px;
+
+            font-weight: 800;
+
+        }
+
+
+        .brand span {
+
+            color: #818cf8;
+
+        }
+
+
+        .menu-title {
+
+            padding:
+                25px 25px 12px;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            color: #6b7280;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.2px;
+
+        }
+
+
+        .nav {
+
+            padding: 0 13px;
+
+        }
+
+
+        .nav a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            color: #9ca3af;
+
+            text-decoration: none;
+
+            padding: 12px 13px;
+
+            margin-bottom: 4px;
+
+            border-radius: 9px;
+
+            font-size: 13px;
+
+            font-weight: 500;
+
+            transition: .2s;
+
+        }
+
+
+        .nav a i {
+
+            width: 20px;
+
+            text-align: center;
+
+        }
+
+
+        .nav a:hover {
+
+            background:
+                rgba(255,255,255,.05);
+
+            color: white;
+
+        }
+
+
+        .nav a.active {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(99,102,241,.25),
+                    rgba(99,102,241,.08)
+                );
+
+            color: white;
+
+        }
+
+
+        .nav a.active i {
+
+            color: #818cf8;
+
+        }
+
+
+        /* =====================================================
+           SIDEBAR PROFILE
+        ===================================================== */
+
+        .sidebar-bottom {
+
+            position: absolute;
+
+            bottom: 20px;
+
+            left: 13px;
+
+            right: 13px;
+
+        }
+
+
+        .profile-mini {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,255,255,.04);
+
+        }
+
+
+        .profile-avatar {
+
+            width: 34px;
+
+            height: 34px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #8b5cf6
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+        .profile-info strong {
+
+            display: block;
+
+            font-size: 12px;
+
+        }
+
+
+        .profile-info small {
+
+            color: #6b7280;
+
+            font-size: 10px;
+
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main {
+
+            margin-left: 260px;
+
+            width:
+                calc(100% - 260px);
+
+        }
+
+
+        /* =====================================================
+           TOPBAR
+        ===================================================== */
+
+        .topbar {
+
+            height: 80px;
+
+            background: white;
+
+            border-bottom:
+                1px solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 32px;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 50;
+
+        }
+
+
+        .page-title h1 {
+
+            font-size: 21px;
+
+            font-weight: 800;
+
+        }
+
+
+        .page-title p {
+
+            font-size: 12px;
+
+            color: var(--muted);
+
+            margin-top: 4px;
+
+        }
+
+
+        .top-actions {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+        }
+
+
+        .notification {
+
+            width: 38px;
+
+            height: 38px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #4b5563;
+
+            position: relative;
+
+            background: white;
+
+        }
+
+
+        .notification .dot {
+
+            position: absolute;
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background:
+                var(--danger);
+
+            top: 8px;
+
+            right: 8px;
+
+            border:
+                2px solid white;
+
+        }
+
+
+        .admin {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        .admin-avatar {
+
+            width: 38px;
+
+            height: 38px;
+
+            background: #eef2ff;
+
+            color: var(--primary);
+
+            border-radius: 10px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-weight: 700;
+
+            font-size: 13px;
+
+        }
+
+
+        .admin-info strong {
+
+            font-size: 12px;
+
+            display: block;
+
+        }
+
+
+        .admin-info span {
+
+            font-size: 10px;
+
+            color: var(--muted);
+
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
+        .content {
+
+            padding: 30px 32px;
+
+        }
+
+
+        /* =====================================================
+           WELCOME
+        ===================================================== */
+
+        .welcome-card {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #7c3aed
+                );
+
+            color: white;
+
+            border-radius: 15px;
+
+            padding: 24px 26px;
+
+            margin-bottom: 25px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            overflow: hidden;
+
+            position: relative;
+
+        }
+
+
+        .welcome-content {
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        .welcome-content h2 {
+
+            font-size: 21px;
+
+            font-weight: 800;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .welcome-content p {
+
+            font-size: 12px;
+
+            opacity: .85;
+
+        }
+
+
+        .welcome-icon {
+
+            width: 110px;
+
+            height: 110px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,.08);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 48px;
+
+            position: absolute;
+
+            right: 35px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+        }
+
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .stat-card {
+
+            background: white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 14px;
+
+            padding: 20px;
+
+            box-shadow:
+                var(--shadow);
+
+            transition: .2s;
+
+        }
+
+
+        .stat-card:hover {
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        .stat-top {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+        }
+
+
+        .stat-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 11px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+
+        .purple {
+
+            background: #eef2ff;
+
+            color: #6366f1;
+
+        }
+
+
+        .green {
+
+            background: #ecfdf5;
+
+            color: #10b981;
+
+        }
+
+
+        .orange {
+
+            background: #fffbeb;
+
+            color: #f59e0b;
+
+        }
+
+
+        .red {
+
+            background: #fef2f2;
+
+            color: #ef4444;
+
+        }
+
+
+        .stat-card h3 {
+
+            font-size: 25px;
+
+            margin-top: 15px;
+
+        }
+
+
+        .stat-card p {
+
+            font-size: 11px;
+
+            color: var(--muted);
+
+            margin-top: 4px;
+
+        }
+
+
+        .stat-change {
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            margin-top: 8px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 4px;
+
+        }
+
+
+        .stat-change.up {
+
+            color: var(--success);
+
+        }
+
+
+        .stat-change.warning {
+
+            color: var(--warning);
+
+        }
+
+
+        /* =====================================================
+           GRID
+        ===================================================== */
+
+        .dashboard-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1.6fr 1fr;
+
+            gap: 20px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .dashboard-grid-bottom {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 20px;
+
+        }
+
+
+        /* =====================================================
+           SECTION CARD
+        ===================================================== */
+
+        .section-card {
+
+            background: white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 15px;
+
+            box-shadow:
+                var(--shadow);
+
+            overflow: hidden;
+
+        }
+
+
+        .section-header {
+
+            padding: 18px 20px;
+
+            border-bottom:
+                1px solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+        }
+
+
+        .section-header h2 {
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+        }
+
+
+        .section-header p {
+
+            font-size: 10px;
+
+            color: var(--muted);
+
+            margin-top: 3px;
+
+        }
+
+
+        .view-all {
+
+            font-size: 10px;
+
+            color: var(--primary);
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+        }
+
+
+        .view-all:hover {
+
+            color:
+                var(--primary-dark);
+
+        }
+
+
+        /* =====================================================
+           TABLE
+        ===================================================== */
+
+        .table-wrapper {
+
+            overflow-x: auto;
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse:
+                collapse;
+
+        }
+
+
+        th {
+
+            background: #fafafa;
+
+            color: #6b7280;
+
+            text-transform:
+                uppercase;
+
+            font-size: 8px;
+
+            letter-spacing: .6px;
+
+            font-weight: 700;
+
+            text-align: left;
+
+            padding: 12px 18px;
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        td {
+
+            padding: 13px 18px;
+
+            border-bottom:
+                1px solid #f0f1f3;
+
+            font-size: 11px;
+
+        }
+
+
+        tr:last-child td {
+
+            border-bottom: none;
+
+        }
+
+
+        tr:hover td {
+
+            background: #fafbff;
+
+        }
+
+
+        .member-info,
+        .book-info {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+        }
+
+
+        .avatar {
+
+            width: 32px;
+
+            height: 32px;
+
+            border-radius: 8px;
+
+            background: #eef2ff;
+
+            color: var(--primary);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .book-icon {
+
+            width: 31px;
+
+            height: 38px;
+
+            border-radius: 5px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4338ca,
+                    #6366f1
+                );
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .member-name strong,
+        .book-name strong {
+
+            display: block;
+
+            font-size: 11px;
+
+            margin-bottom: 2px;
+
+        }
+
+
+        .member-name span,
+        .book-name span {
+
+            font-size: 9px;
+
+            color: var(--muted);
+
+        }
+
+
+        .date {
+
+            font-size: 10px;
+
+            color: #4b5563;
+
+        }
+
+
+        .badge {
+
+            display: inline-flex;
+
+            padding: 5px 8px;
+
+            border-radius: 20px;
+
+            font-size: 8px;
+
+            font-weight: 600;
+
+        }
+
+
+        .issued {
+
+            color: #4338ca;
+
+            background: #eef2ff;
+
+        }
+
+
+        .returned {
+
+            color: #047857;
+
+            background: #ecfdf5;
+
+        }
+
+
+        .overdue {
+
+            color: #b91c1c;
+
+            background: #fef2f2;
+
+        }
+
+
+        .pending {
+
+            color: #b45309;
+
+            background: #fffbeb;
+
+        }
+
+
+        /* =====================================================
+           QUICK ACTIONS
+        ===================================================== */
+
+        .quick-actions {
+
+            padding: 20px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 10px;
+
+        }
+
+
+        .quick-action {
+
+            text-decoration: none;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 10px;
+
+            padding: 14px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            color: var(--text);
+
+            transition: .2s;
+
+        }
+
+
+        .quick-action:hover {
+
+            border-color:
+                #c7d2fe;
+
+            background:
+                #fafbff;
+
+            transform:
+                translateY(-1px);
+
+        }
+
+
+        .quick-action-icon {
+
+            width: 35px;
+
+            height: 35px;
+
+            border-radius: 9px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #eef2ff;
+
+            color: var(--primary);
+
+            flex-shrink: 0;
+
+        }
+
+
+        .quick-action strong {
+
+            display: block;
+
+            font-size: 11px;
+
+            margin-bottom: 3px;
+
+        }
+
+
+        .quick-action span {
+
+            font-size: 9px;
+
+            color: var(--muted);
+
+        }
+
+
+        /* =====================================================
+           ACTIVITY
+        ===================================================== */
+
+        .activity-list {
+
+            padding: 8px 20px 15px;
+
+        }
+
+
+        .activity-item {
+
+            display: flex;
+
+            gap: 11px;
+
+            padding: 12px 0;
+
+            border-bottom:
+                1px solid #f0f1f3;
+
+        }
+
+
+        .activity-item:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .activity-icon {
+
+            width: 31px;
+
+            height: 31px;
+
+            border-radius: 8px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            font-size: 11px;
+
+        }
+
+
+        .activity-content {
+
+            flex: 1;
+
+        }
+
+
+        .activity-content strong {
+
+            display: block;
+
+            font-size: 10px;
+
+            margin-bottom: 3px;
+
+        }
+
+
+        .activity-content span {
+
+            display: block;
+
+            font-size: 9px;
+
+            color: var(--muted);
+
+        }
+
+
+        .activity-time {
+
+            font-size: 8px;
+
+            color: #9ca3af;
+
+            white-space: nowrap;
+
+        }
+
+
+        /* =====================================================
+           CATEGORY SECTION
+        ===================================================== */
+
+        .category-list {
+
+            padding: 18px 20px;
+
+        }
+
+
+        .category-item {
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .category-item:last-child {
+
+            margin-bottom: 0;
+
+        }
+
+
+        .category-top {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .category-top span {
+
+            font-size: 10px;
+
+            color: #4b5563;
+
+        }
+
+
+        .category-top strong {
+
+            font-size: 10px;
+
+        }
+
+
+        .progress {
+
+            height: 6px;
+
+            background: #f1f5f9;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+        }
+
+
+        .progress-bar {
+
+            height: 100%;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #6366f1,
+                    #8b5cf6
+                );
+
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty-state {
+
+            text-align: center;
+
+            padding: 35px 20px;
+
+            color: var(--muted);
+
+        }
+
+
+        .empty-state i {
+
+            font-size: 28px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .empty-state p {
+
+            font-size: 11px;
+
+        }
+
+
+        /* =====================================================
+           MOBILE MENU
+        ===================================================== */
+
+        .mobile-menu {
+
+            display: none;
+
+            border: none;
+
+            background: transparent;
+
+            font-size: 20px;
+
+            cursor: pointer;
+
+            color: var(--text);
+
+        }
+
+
+        /* =====================================================
+           REFRESH BUTTON
+        ===================================================== */
+
+        .refresh-btn {
+
+            width: 32px;
+
+            height: 32px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 8px;
+
+            background: white;
+
+            color: var(--muted);
+
+            cursor: pointer;
+
+        }
+
+
+        .refresh-btn:hover {
+
+            color: var(--primary);
+
+            background: #eef2ff;
+
+        }
+
+
+        /* =====================================================
+           TOAST
+        ===================================================== */
+
+        .toast {
+
+            position: fixed;
+
+            right: 25px;
+
+            bottom: 25px;
+
+            background: #111827;
+
+            color: white;
+
+            padding: 13px 17px;
+
+            border-radius: 10px;
+
+            font-size: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transform:
+                translateY(15px);
+
+            transition: .3s;
+
+            z-index: 2000;
+
+        }
+
+
+        .toast.show {
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media(max-width:1100px) {
+
+            .stats {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+            }
+
+
+            .dashboard-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .dashboard-grid-bottom {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+        }
+
+
+        @media(max-width:800px) {
+
+            .sidebar {
+
+                transform:
+                    translateX(-100%);
+
+            }
+
+
+            .sidebar.open {
+
+                transform:
+                    translateX(0);
+
+            }
+
+
+            .main {
+
+                margin-left: 0;
+
+                width: 100%;
+
+            }
+
+
+            .mobile-menu {
+
+                display: block;
+
+                margin-right: 15px;
+
+            }
+
+
+            .content {
+
+                padding:
+                    20px 15px;
+
+            }
+
+
+            .topbar {
+
+                padding:
+                    0 18px;
+
+            }
+
+
+            .welcome-card {
+
+                padding: 20px;
+
+            }
+
+
+            .welcome-icon {
+
+                right: 10px;
+
+                opacity: .6;
+
+            }
+
+
+            .admin-info {
+
+                display: none;
+
+            }
+
+
+            .notification {
+
+                display: none;
+
+            }
+
+        }
+
+
+        @media(max-width:500px) {
+
+            .stats {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .quick-actions {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .welcome-content h2 {
+
+                font-size: 17px;
+
+            }
+
+
+            .welcome-content p {
+
+                max-width: 70%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar">
+
+
+        <!-- BRAND -->
+
+        <div class="brand">
+
+            <div class="brand-icon">
+
+                <i class="fa-solid fa-book-open"></i>
+
+            </div>
+
+            <h2>
+                Libr<span>aria</span>
+            </h2>
+
+        </div>
+
+
+        <!-- MAIN MENU -->
+
+        <div class="menu-title">
+            Main Menu
+        </div>
+
+
+        <nav class="nav">
+
+
+            <a
+                href="dashboard.html"
+                class="active">
+
+                <i class="fa-solid fa-grid-2"></i>
+
+                Dashboard
+
+            </a>
+
+
+            <a href="books.html">
+
+                <i class="fa-solid fa-book"></i>
+
+                Books
+
+            </a>
+
+
+            <a href="members.html">
+
+                <i class="fa-solid fa-users"></i>
+
+                Members
+
+            </a>
+
+
+            <a href="issue-books.html">
+
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+                Issue Books
+
+            </a>
+
+
+            <a href="returns.html">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Returns
+
+            </a>
+
+
+            <a href="reservations.html">
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+                Reservations
+
+            </a>
+
+        </nav>
+
+
+        <!-- MANAGEMENT -->
+
+        <div class="menu-title">
+            Management
+        </div>
+
+
+        <nav class="nav">
+
+
+            <a href="categories.html">
+
+                <i class="fa-solid fa-layer-group"></i>
+
+                Categories
+
+            </a>
+
+
+            <a href="authors.html">
+
+                <i class="fa-solid fa-pen-nib"></i>
+
+                Authors
+
+            </a>
+
+
+            <a href="reports.html">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                Reports
+
+            </a>
+
+
+            <a href="settings.html">
+
+                <i class="fa-solid fa-gear"></i>
+
+                Settings
+
+            </a>
+
+        </nav>
+
+
+        <!-- PROFILE -->
+
+        <div class="sidebar-bottom">
+
+            <div class="profile-mini">
+
+                <div class="profile-avatar">
+                    PK
+                </div>
+
+
+                <div class="profile-info">
+
+                    <strong>
+                        Piyush Kulkarni
+                    </strong>
+
+                    <small>
+                        Administrator
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+
+            <div
+                style="
+                    display:flex;
+                    align-items:center;
+                ">
+
+
+                <button
+                    type="button"
+                    class="mobile-menu"
+                    onclick="toggleSidebar()">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div class="page-title">
+
+                    <h1>
+                        Dashboard
+                    </h1>
+
+                    <p>
+                        Welcome back, here's what's happening in your library
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="top-actions">
+
+
+                <button
+                    type="button"
+                    class="refresh-btn"
+                    title="Refresh Dashboard"
+                    onclick="refreshDashboard()">
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                </button>
+
+
+                <div class="notification">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="dot"></span>
+
+                </div>
+
+
+                <div class="admin">
+
+                    <div class="admin-avatar">
+                        PK
+                    </div>
+
+
+                    <div class="admin-info">
+
+                        <strong>
+                            Piyush Kulkarni
+                        </strong>
+
+                        <span>
+                            Administrator
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <section class="content">
+
+
+            <!-- WELCOME CARD -->
+
+            <div class="welcome-card">
+
+
+                <div class="welcome-content">
+
+                    <h2>
+                        Welcome to Libraria 👋
+                    </h2>
+
+                    <p>
+                        Manage your library efficiently,
+                        track books, members and transactions
+                        from one place.
+                    </p>
+
+                </div>
+
+
+                <div class="welcome-icon">
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 STATISTICS
+            ================================================== -->
+
+            <div class="stats">
+
+
+                <!-- TOTAL BOOKS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon purple">
+
+                            <i class="fa-solid fa-book"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <h3 id="totalBooks">
+                        0
+                    </h3>
+
+
+                    <p>
+                        Total Books
+                    </p>
+
+
+                    <span class="stat-change up">
+
+                        <i class="fa-solid fa-arrow-up"></i>
+
+                        <span id="bookAvailability">
+                            0 available
+                        </span>
+
+                    </span>
+
+                </div>
+
+
+                <!-- TOTAL MEMBERS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon green">
+
+                            <i class="fa-solid fa-users"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <h3 id="totalMembers">
+                        0
+                    </h3>
+
+
+                    <p>
+                        Total Members
+                    </p>
+
+
+                    <span class="stat-change up">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <span id="activeMembers">
+                            0 active
+                        </span>
+
+                    </span>
+
+                </div>
+
+
+                <!-- ISSUED BOOKS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon orange">
+
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <h3 id="issuedBooks">
+                        0
+                    </h3>
+
+
+                    <p>
+                        Currently Issued
+                    </p>
+
+
+                    <span class="stat-change warning">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        <span id="dueSoonBooks">
+                            0 due soon
+                        </span>
+
+                    </span>
+
+                </div>
+
+
+                <!-- OVERDUE -->
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon red">
+
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <h3 id="overdueBooks">
+                        0
+                    </h3>
+
+
+                    <p>
+                        Overdue Books
+                    </p>
+
+
+                    <span class="stat-change warning">
+
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                        <span id="totalFines">
+                            ₹0 fine
+                        </span>
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 MAIN DASHBOARD GRID
+            ================================================== -->
+
+            <div class="dashboard-grid">
+
+
+                <!-- RECENT ISSUES -->
+
+                <div class="section-card">
+
+
+                    <div class="section-header">
+
+                        <div>
+
+                            <h2>
+                                Recent Issues
+                            </h2>
+
+                            <p>
+                                Latest book issue transactions
+                            </p>
+
+                        </div>
+
+
+                        <a
+                            href="issue-books.html"
+                            class="view-all">
+
+                            View All
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Book
+                                    </th>
+
+                                    <th>
+                                        Member
+                                    </th>
+
+                                    <th>
+                                        Due Date
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="recentIssues">
+
+
+                                <tr>
+
+                                    <td colspan="4">
+
+                                        <div class="empty-state">
+
+                                            <i class="fa-solid fa-spinner fa-spin"></i>
+
+                                            <p>
+                                                Loading recent issues...
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUICK ACTIONS -->
+
+                <div class="section-card">
+
+
+                    <div class="section-header">
+
+                        <div>
+
+                            <h2>
+                                Quick Actions
+                            </h2>
+
+                            <p>
+                                Frequently used operations
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-actions">
+
+
+                        <a
+                            href="books.html"
+                            class="quick-action">
+
+
+                            <div class="quick-action-icon">
+
+                                <i class="fa-solid fa-plus"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Add Book
+                                </strong>
+
+                                <span>
+                                    Add a new book
+                                </span>
+
+                            </div>
+
+
+                        </a>
+
+
+                        <a
+                            href="members.html"
+                            class="quick-action">
+
+
+                            <div class="quick-action-icon">
+
+                                <i class="fa-solid fa-user-plus"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Add Member
+                                </strong>
+
+                                <span>
+                                    Register member
+                                </span>
+
+                            </div>
+
+
+                        </a>
+
+
+                        <a
+                            href="issue-books.html"
+                            class="quick-action">
+
+
+                            <div class="quick-action-icon">
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Issue Book
+                                </strong>
+
+                                <span>
+                                    Issue a book
+                                </span>
+
+                            </div>
+
+
+                        </a>
+
+
+                        <a
+                            href="returns.html"
+                            class="quick-action">
+
+
+                            <div class="quick-action-icon">
+
+                                <i class="fa-solid fa-arrow-left"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Return Book
+                                </strong>
+
+                                <span>
+                                    Process return
+                                </span>
+
+                            </div>
+
+
+                        </a>
+
+
+                        <a
+                            href="reservations.html"
+                            class="quick-action">
+
+
+                            <div class="quick-action-icon">
+
+                                <i class="fa-solid fa-calendar-check"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Reservation
+                                </strong>
+
+                                <span>
+                                    Reserve a book
+                                </span>
+
+                            </div>
+
+
+                        </a>
+
+
+                        <a
+                            href="reports.html"
+                            class="quick-action">
+
+
+                            <div class="quick-action-icon">
+
+                                <i class="fa-solid fa-chart-column"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Reports
+                                </strong>
+
+                                <span>
+                                    View reports
+                                </span>
+
+                            </div>
+
+
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 BOTTOM GRID
+            ================================================== -->
+
+            <div class="dashboard-grid-bottom">
+
+
+                <!-- RECENT RETURNS -->
+
+                <div class="section-card">
+
+
+                    <div class="section-header">
+
+                        <div>
+
+                            <h2>
+                                Recent Returns
+                            </h2>
+
+                            <p>
+                                Latest returned books
+                            </p>
+
+                        </div>
+
+
+                        <a
+                            href="returns.html"
+                            class="view-all">
+
+                            View All
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Book
+                                    </th>
+
+                                    <th>
+                                        Member
+                                    </th>
+
+                                    <th>
+                                        Return Date
+                                    </th>
+
+                                    <th>
+                                        Fine
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="recentReturns">
+
+
+                                <tr>
+
+                                    <td colspan="4">
+
+                                        <div class="empty-state">
+
+                                            <i class="fa-solid fa-spinner fa-spin"></i>
+
+                                            <p>
+                                                Loading recent returns...
+                                            </p>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LIBRARY ACTIVITY -->
+
+                <div class="section-card">
+
+
+                    <div class="section-header">
+
+                        <div>
+
+                            <h2>
+                                Library Activity
+                            </h2>
+
+                            <p>
+                                Recent activity
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="activity-list"
+                        id="activityList">
+
+
+                        <div class="activity-item">
+
+                            <div
+                                class="activity-icon purple">
+
+                                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                            </div>
+
+
+                            <div class="activity-content">
+
+                                <strong>
+                                    Loading activity...
+                                </strong>
+
+                                <span>
+                                    Please wait
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 CATEGORY DISTRIBUTION
+            ================================================== -->
+
+            <div
+                class="section-card"
+                style="margin-top:20px;">
+
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            Book Categories
+                        </h2>
+
+                        <p>
+                            Distribution of books across categories
+                        </p>
+
+                    </div>
+
+
+                    <a
+                        href="books.html"
+                        class="view-all">
+
+                        Manage Books
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <div
+                    class="category-list"
+                    id="categoryList">
+
+
+                    <div class="empty-state">
+
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+
+                        <p>
+                            Loading categories...
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================== -->
+
+<div
+    class="toast"
+    id="toast">
+
+
+    <i
+        class="fa-solid fa-circle-check">
+    </i>
+
+
+    <span id="toastMessage">
+        Dashboard refreshed
+    </span>
+
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================== -->
+
+<script src="js/dashboard.js"></script>
+
+
+</body>
+
+</html>
